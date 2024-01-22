@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-go1.19:bionic as BUILD
+FROM ghcr.io/mackenzie-remote/base-go1.19:bionic as BUILD
 ARG git_repository=https://github.com/cosmos/cosmos-sdk
 ARG git_version=main
 RUN git clone --recursive --branch $git_version $git_repository /build_dir

@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-rustup:bionic as BUILD
+FROM ghcr.io/mackenzie-remote/base-rustup:bionic as BUILD
 ARG git_repository=https://github.com/AcalaNetwork/Acala
 ARG git_version=main
 RUN git clone --recursive --branch $git_version $git_repository /build_dir

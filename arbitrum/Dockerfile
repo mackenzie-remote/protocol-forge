@@ -1,8 +1,8 @@
-FROM ghcr.io/oshied/base-rocksdb:focal-v6.29.3 as BUILD_ROCKS
+FROM ghcr.io/mackenzie-remote/base-rocksdb:focal-v6.29.3 as BUILD_ROCKS
 
-FROM ghcr.io/oshied/base-go1.19:focal as BUILD_GO
+FROM ghcr.io/mackenzie-remote/base-go1.19:focal as BUILD_GO
 
-FROM ghcr.io/oshied/base-nodejs-lts:focal as BUILD
+FROM ghcr.io/mackenzie-remote/base-nodejs-lts:focal as BUILD
 WORKDIR /usr/local/lib
 COPY --from=BUILD_ROCKS /usr/local/lib /usr/local/lib
 WORKDIR /usr/local/include

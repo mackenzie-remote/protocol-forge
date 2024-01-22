@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-build:bionic as bionic
+FROM ghcr.io/mackenzie-remote/base-build:bionic as bionic
 ARG name="base-dpkg"
 ARG summary="DPKG build environment"
 LABEL description="${summary}" \
@@ -17,7 +17,7 @@ COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postinst
 COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postrm
 WORKDIR /packages
 
-FROM ghcr.io/oshied/base-build:focal as focal
+FROM ghcr.io/mackenzie-remote/base-build:focal as focal
 ARG name="base-dpkg"
 ARG summary="DPKG build environment"
 LABEL description="${summary}" \
@@ -36,7 +36,7 @@ COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postinst
 COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postrm
 WORKDIR /packages
 
-FROM ghcr.io/oshied/base-build:jammy as jammy
+FROM ghcr.io/mackenzie-remote/base-build:jammy as jammy
 ARG name="base-dpkg"
 ARG summary="DPKG build environment"
 LABEL description="${summary}" \

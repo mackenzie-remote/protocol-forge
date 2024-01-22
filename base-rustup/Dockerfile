@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-build:bionic as bionic
+FROM ghcr.io/mackenzie-remote/base-build:bionic as bionic
 ARG name="base-rustup"
 ARG summary="Base build image for rust built on-top of ubuntu Bionic"
 LABEL description="${summary}" \
@@ -13,7 +13,7 @@ LABEL description="${summary}" \
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="$PATH:/root/.cargo/bin"
 
-FROM ghcr.io/oshied/base-build:focal as focal
+FROM ghcr.io/mackenzie-remote/base-build:focal as focal
 ARG name="base-rustup"
 ARG summary="Base build image for rust built on-top of ubuntu Focal"
 LABEL description="${summary}" \
@@ -28,7 +28,7 @@ LABEL description="${summary}" \
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="$PATH:/root/.cargo/bin"
 
-FROM ghcr.io/oshied/base-build:jammy as jammy
+FROM ghcr.io/mackenzie-remote/base-build:jammy as jammy
 ARG name="base-rustup"
 ARG summary="Base build image for rust built on-top of ubuntu Jammy"
 LABEL description="${summary}" \

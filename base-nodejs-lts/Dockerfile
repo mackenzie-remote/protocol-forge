@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-build:bionic as bionic
+FROM ghcr.io/mackenzie-remote/base-build:bionic as bionic
 ARG name="base-nodejs-lts"
 ARG summary="Base build image for nodejs built on-top of ubuntu Bionic"
 LABEL description="${summary}" \
@@ -14,7 +14,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 RUN apt install -y nodejs
 RUN npm install --global yarn
 
-FROM ghcr.io/oshied/base-build:focal as focal
+FROM ghcr.io/mackenzie-remote/base-build:focal as focal
 ARG name="base-nodejs-lts"
 ARG summary="Base build image for nodejs built on-top of ubuntu Focal"
 LABEL description="${summary}" \
@@ -30,7 +30,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 RUN apt install -y nodejs
 RUN npm install --global yarn
 
-FROM ghcr.io/oshied/base-build:jammy as jammy
+FROM ghcr.io/mackenzie-remote/base-build:jammy as jammy
 ARG name="base-nodejs-lts"
 ARG summary="Base build image for nodejs built on-top of ubuntu Jammy"
 LABEL description="${summary}" \

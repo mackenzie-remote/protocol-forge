@@ -1,4 +1,4 @@
-FROM ghcr.io/oshied/base-build:bionic as bionic
+FROM ghcr.io/mackenzie-remote/base-build:bionic as bionic
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt update && apt upgrade -y
@@ -24,7 +24,7 @@ RUN ln -sf /usr/bin/make /usr/bin/gmake
 RUN PORTABLE=1 DISABLE_WARNING_AS_ERROR=1 make -j 16 shared_lib
 RUN make install-shared
 
-FROM ghcr.io/oshied/base-build:focal as focal
+FROM ghcr.io/mackenzie-remote/base-build:focal as focal
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt update && apt upgrade -y
@@ -50,7 +50,7 @@ RUN ln -sf /usr/bin/make /usr/bin/gmake
 RUN PORTABLE=1 DISABLE_WARNING_AS_ERROR=1 make -j 16 shared_lib
 RUN make install-shared
 
-FROM ghcr.io/oshied/base-build:jammy as jammy
+FROM ghcr.io/mackenzie-remote/base-build:jammy as jammy
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt update && apt upgrade -y

@@ -184,7 +184,7 @@ jobs:
                           --env CONTAINER_TAG='${{ matrix.version }}' \
                           --env PROTOCOL_NAME='${{ matrix.base }}' \
                           --env BUILD_EXEC="$(echo '${{ matrix.manifest }}' | awk '{print $1}')" \
-                          ghcr.io/oshied/base-dpkg:jammy \
+                          ghcr.io/mackenzie-remote/base-dpkg:jammy \
                           /srv/build-deb.sh
             find /tmp/deb
           fi

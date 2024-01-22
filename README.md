@@ -117,7 +117,7 @@ export PROTOCOL_NAME="$(basename $(pwd))"
 #                  reproduceability.
 docker build --build-arg git_version=${CONTAINER_TAG} \
              --tag ${PROTOCOL_NAME}:${CONTAINER_TAG} \
-             --cache-from type=registry,ref=ghcr.io/oshied/${PROTOCOL_NAME}:buildcache-target \
+             --cache-from type=registry,ref=ghcr.io/mackenzie-remote/${PROTOCOL_NAME}:buildcache-target \
              .
 ```
 
@@ -184,7 +184,7 @@ mkdir /tmp/packages
 mkdir /tmp/binaries
 
 # Pull the contents of the manifest from the current container version
-CONTAINER="$(docker create ghcr.io/oshied/${PROTOCOL_NAME}:${CONTAINER_TAG} ${PROTOCOL_NAME})"
+CONTAINER="$(docker create ghcr.io/mackenzie-remote/${PROTOCOL_NAME}:${CONTAINER_TAG} ${PROTOCOL_NAME})"
 for FILE_NAME in $(sed 's/[[:space:]]//g' MANIFEST | tr '\n' ' '); do
   BASE_FILE_NAME="$(basename ${FILE_NAME})"
   mkdir -p "/tmp/binaries/$(dirname ${FILE_NAME})"
@@ -199,7 +199,7 @@ docker run -t --volume /tmp/packages:/packages:rw \
               --env PROTOCOL_NAME="${PROTOCOL_NAME}" \
               --env BUILD_EXEC="${BUILD_EXEC}" \
               --env BUILD_MAINTAINER="${BUILD_MAINTAINER}" \
-              ghcr.io/oshied/base-dpkg:jammy \
+              ghcr.io/mackenzie-remote/base-dpkg:jammy \
               /srv/build-deb.sh
 ```
 
