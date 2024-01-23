@@ -33,7 +33,7 @@ jobs:
       matrix: "${{ fromJson(needs.setup.outputs.matrix) }}"
     steps:
       - uses: actions/checkout@v3
-      - name: Extract and push binaries
+      - name: Update VERSION file
         run: |
           echo "${{ matrix.current_release }}" > ${{ matrix.name }}/VERSION
       - name: Create Pull Request
@@ -42,18 +42,18 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.PAT_GITHUB_TOKEN }}
-          commit-message: Update project tracking
+          commit-message: 'chore(${{ matrix.name }}): Update to ${{ matrix.current_release }}'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: update-projects-${{ matrix.name }}-${{ matrix.current_release }}
+          branch: version-update-${{ matrix.name }}-${{ matrix.current_release }}
           delete-branch: true
-          title: 'chore: Update ${{ matrix.name }} to ${{ matrix.current_release }}'
+          title: 'chore(${{ matrix.name }}): Update to ${{ matrix.current_release }}'
           body: |
-            Automated update for ${{ matrix.name }}.
+            Automated update for `${{ matrix.name }}`
 
-            The found in repo version is ${{ matrix.existing_release }} and the current head is
-            has been changed to ${{ matrix.current_release }}.
+            Old version: `${{ matrix.existing_release }}`
+            New version: `${{ matrix.current_release }}`
           labels: |
             automated pr
           draft: false
