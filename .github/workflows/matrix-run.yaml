@@ -87,7 +87,7 @@ jobs:
             fi
           fi
           echo "value=${REF_SHA}" >> $GITHUB_OUTPUT
-      - name: Set reference sha
+      - name: mkdir /tmp/.buildx-cache
         run: |
           mkdir -p /tmp/.buildx-cache
       - name: Build and push
