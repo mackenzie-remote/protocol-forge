@@ -32,10 +32,11 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
-      - name: Set notification matrix
+      - name: find-docker-files.py to generate notification matrix
         id: matrix
         run: |
-          echo "matrix=$(.github/bin/find-docker-files.py ${{ steps.changed-files.outputs.all_changed_files }})" >> $GITHUB_OUTPUT
+          .github/bin/find-docker-files.py ${{ steps.changed-files.outputs.all_changed_files }} | tee /tmp/matrix
+          echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
 
   build:
     environment: ${{ github.event_name == 'push' && 'main' || 'dev' }}
