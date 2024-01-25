@@ -10,6 +10,7 @@ LABEL description="${summary}" \
       org.opencontainers.image.authors="kevin@cloudnull.com" \
       org.opencontainers.image.vendor="cloudnull.io" \
       org.opencontainers.image.description="${summary}"
+RUN apt-get update && apt-get install -y libprotobuf-dev protobuf-compiler && rm -rf /var/lib/apt/lists/*
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="$PATH:/root/.cargo/bin"
 
@@ -25,5 +26,6 @@ LABEL description="${summary}" \
       org.opencontainers.image.authors="kevin@cloudnull.com" \
       org.opencontainers.image.vendor="cloudnull.io" \
       org.opencontainers.image.description="${summary}"
+RUN apt-get update && apt-get install -y libprotobuf-dev protobuf-compiler && rm -rf /var/lib/apt/lists/*
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="$PATH:/root/.cargo/bin"
