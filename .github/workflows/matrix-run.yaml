@@ -79,13 +79,14 @@ jobs:
       - name: Set reference sha
         id: refsha
         run: |
-          REF_SHA="${{ github.event.pull_request.base.sha }}"
+          export REF_SHA="${{ github.event.pull_request.base.sha }}"
           if [ -z "$REF_SHA" ]; then
             export REF_SHA=${{ github.event.before }}
             if [ -z "$REF_SHA" ]; then
               export REF_SHA=${{ github.sha }}
             fi
           fi
+          echo "REF_SHA=${REF_SHA}"
           echo "value=${REF_SHA}" >> $GITHUB_OUTPUT
       - name: mkdir /tmp/.buildx-cache
         run: |
