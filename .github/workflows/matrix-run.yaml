@@ -35,7 +35,8 @@ jobs:
       - name: find-docker-files.py to generate notification matrix
         id: matrix
         run: |
-          .github/bin/find-docker-files.py ${{ steps.changed-files.outputs.all_changed_files }} | tee /tmp/matrix
+          .github/bin/find-docker-files.py ${{ steps.changed-files.outputs.all_changed_files }} >/tmp/matrix
+          cat /tmp/matrix
           echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
 
   build:
