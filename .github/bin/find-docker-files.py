@@ -24,7 +24,7 @@ def main():
                     if not version_str:
                         bad_versions[version_file] = "Version is undefined"
             else:
-                item["version"] = "latest"
+                bad_versions[version_file] = "VERSION file missing or invalid"
             manifest_file = os.path.join(path, "MANIFEST")
             if os.path.exists(manifest_file):
                 with open(manifest_file, encoding="utf-8") as f:
