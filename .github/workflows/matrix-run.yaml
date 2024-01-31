@@ -218,8 +218,8 @@ jobs:
           draft: false
           prerelease: false
           fail_on_unmatched_files: false
-          tag_name: ${{ matrix.version }}-${{ needs.build.outputs.refsha }}
-          name: ${{ matrix.base }} build release for ${{ matrix.version }} on ${{ needs.build.outputs.targettag }}
+          tag_name: ${{ matrix.base }}-${{ matrix.version }}
+          name: ${{ matrix.base }}-${{ matrix.version }}
           body: |
             Build release for ${{ matrix.base }} version ${{ matrix.version }}.
 
