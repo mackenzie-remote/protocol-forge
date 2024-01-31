@@ -1,2 +1,2 @@
-/usr/local/bin/sui
-/usr/local/bin/sui-node
+/build_dir/target/release/sui
+/build_dir/target/release/sui-node
