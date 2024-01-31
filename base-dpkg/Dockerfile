@@ -10,7 +10,7 @@ LABEL description="${summary}" \
       org.opencontainers.image.authors="kevin@cloudnull.com" \
       org.opencontainers.image.vendor="cloudnull.io" \
       org.opencontainers.image.description="${summary}"
-RUN apt install -y dpkg gettext-base
+RUN apt-get update && apt-get install -y dpkg gettext-base && rm -rf /var/lib/apt/lists/*
 WORKDIR /dpgk/DEBIAN
 COPY debian/control /dpgk/DEBIAN/control
 COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postinst
@@ -29,7 +29,7 @@ LABEL description="${summary}" \
       org.opencontainers.image.authors="kevin@cloudnull.com" \
       org.opencontainers.image.vendor="cloudnull.io" \
       org.opencontainers.image.description="${summary}"
-RUN apt install -y dpkg gettext-base
+RUN apt-get update && apt-get install -y dpkg gettext-base && rm -rf /var/lib/apt/lists/*
 WORKDIR /dpgk/DEBIAN
 COPY debian/control /dpgk/DEBIAN/control
 COPY --chmod=0755 debian/postinst /dpgk/DEBIAN/postinst
