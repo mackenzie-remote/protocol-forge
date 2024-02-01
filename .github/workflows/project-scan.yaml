@@ -23,7 +23,10 @@ jobs:
       - name: Set notification matrix
         id: matrix
         run: |
-          echo "matrix=$(.github/bin/project-release-scan.py ${{ secrets.GITHUB_TOKEN }})" >> $GITHUB_OUTPUT
+          .github/bin/project-release-scan.py ${{ secrets.GITHUB_TOKEN }} >/tmp/matrix
+          cat /tmp/matrix
+          echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
+          rm /tmp/matrix
   Notification:
     needs:
       - setup
