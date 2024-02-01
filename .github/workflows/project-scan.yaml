@@ -20,10 +20,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install requests
-      - name: Set notification matrix
+      - name: Run project-release-scan.py
         id: matrix
         run: |
-          echo "matrix=$(.github/bin/project-release-scan.py ${{ secrets.GITHUB_TOKEN }})" >> $GITHUB_OUTPUT
+          .github/bin/project-release-scan.py ${{ secrets.GITHUB_TOKEN }} >/tmp/matrix
+          cat /tmp/matrix
+          echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
+          rm /tmp/matrix
   Notification:
     needs:
       - setup
@@ -59,6 +62,6 @@ jobs:
           draft: false
       - name: Enable Pull Request Automerge
         if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: gh pr merge --delete-branch --auto ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --delete-branch --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
