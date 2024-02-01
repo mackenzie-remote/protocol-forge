@@ -1,4 +1,4 @@
-FROM ghcr.io/mackenzie-remote/base-rustup:bionic as BUILD
+FROM ghcr.io/mackenzie-remote/base-rustup:jammy as BUILD
 ARG git_repository=https://github.com/near/nearcore
 ARG git_version=main
 RUN git clone --recursive --branch $git_version $git_repository /build_dir
