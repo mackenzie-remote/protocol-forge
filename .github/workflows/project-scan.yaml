@@ -42,18 +42,20 @@ jobs:
       - name: Set create_pr variable if PR branch already exists
         id: create_pr
         run: |
-          create_pr=true
           if git show-ref --quiet ${{ env.pr_branch_name }}; then
-            echo "Branch ${{ env.pr_branch_name }} already exists, setting create_pr=false.."
+            echo "Branch ${{ env.pr_branch_name }} exists, setting create_pr=false.."
             create_pr=false
+          else
+            echo "Branch ${{ env.pr_branch_name }} DOES NOT exist, setting create_pr=true.."
+            create_pr=true
           fi
           echo "create_pr=${create_pr}" >> $GITHUB_ENV
       - name: Update VERSION file
-        if: ${{ env.create_pr }}
+        if: ${{ env.create_pr == 'true' }}
         run: |
           echo "${{ matrix.current_release }}" > ${{ matrix.name }}/VERSION
       - name: Create Pull Request
-        if: ${{ env.create_pr }}
+        if: ${{ env.create_pr == 'true' }}
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
