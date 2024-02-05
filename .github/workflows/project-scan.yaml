@@ -28,6 +28,7 @@ jobs:
           echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
           rm /tmp/matrix
   Notification:
+    if: ${{ needs.setup.outputs.matrix != '' }}
     needs:
       - setup
     runs-on: ubuntu-latest
