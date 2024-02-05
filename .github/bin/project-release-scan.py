@@ -173,8 +173,10 @@ def main():
         except Exception as f:
             pass
 
-    print(json.dumps({"include": updates}))
-
+    if len(updates) > 0:
+        print(json.dumps({"include": updates}))
+    else:
+        print("[]")
 
 if __name__ == "__main__":
     main()
