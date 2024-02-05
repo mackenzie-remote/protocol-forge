@@ -28,4 +28,4 @@ COPY --from=BUILD /build_dir/build/nyxd /usr/local/bin/nyxd
 WORKDIR /usr/local/lib/nyxd
 COPY --from=BUILD /build_dir/build/libwasmvm.x86_64.so /usr/local/lib/nyxd/libwasmvm.x86_64.so
 ENV LD_LIBRARY_PATH=/usr/local/lib/nyxd
-ENTRYPOINT ["/usr/local/bin/wasmd"]
+ENTRYPOINT ["/usr/local/bin/nyxd"]
