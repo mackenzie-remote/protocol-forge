@@ -1,2 +1,2 @@
-/usr/local/bin/wasmd
-/usr/local/lib/nyxd/libwasmvm.so
+/usr/local/bin/nyxd
+/usr/local/lib/nyxd/libwasmvm.x86_64.so
