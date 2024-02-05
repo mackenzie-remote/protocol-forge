@@ -36,11 +36,26 @@ jobs:
       matrix: "${{ fromJson(needs.setup.outputs.matrix) }}"
     steps:
       - uses: actions/checkout@v3
+      - name: Set pr_branch_name variable
+        run: |
+          echo "pr_branch_name=version-update-${{ matrix.name }}-${{ matrix.current_release }}" >> $GITHUB_ENV
+      - name: Set create_pr variable if PR branch already exists
+        id: create_pr
+        run: |
+          if git show-ref --quiet ${{ env.pr_branch_name }}; then
+            echo "Branch ${{ env.pr_branch_name }} exists, setting create_pr=false.."
+            create_pr=false
+          else
+            echo "Branch ${{ env.pr_branch_name }} DOES NOT exist, setting create_pr=true.."
+            create_pr=true
+          fi
+          echo "create_pr=${create_pr}" >> $GITHUB_ENV
       - name: Update VERSION file
+        if: ${{ env.create_pr == 'true' }}
         run: |
           echo "${{ matrix.current_release }}" > ${{ matrix.name }}/VERSION
       - name: Create Pull Request
-        if: steps.matrix.outputs.matrix != '[]'
+        if: ${{ env.create_pr == 'true' }}
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
@@ -49,7 +64,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: version-update-${{ matrix.name }}-${{ matrix.current_release }}
+          branch: ${{ env.pr_branch_name }}
           delete-branch: true
           title: 'chore(${{ matrix.name }}): Update to ${{ matrix.current_release }}'
           body: |
