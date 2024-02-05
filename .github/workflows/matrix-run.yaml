@@ -258,5 +258,6 @@ jobs:
           ${{
                contains(needs.*.result, 'failure')
             || contains(needs.*.result, 'cancelled')
+            || contains(needs.*.result, 'skipped')
           }}
         run: exit 1
