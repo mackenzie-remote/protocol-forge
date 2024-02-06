@@ -53,7 +53,8 @@ def main():
             print(f"[ERROR] {error} in file {file}", file=sys.stderr)
         sys.exit(1)
     else:
-        print(json.dumps({"include": updates}))
+        if len(updates) > 0:
+            print(json.dumps({"include": updates}))
 
 
 if __name__ == "__main__":

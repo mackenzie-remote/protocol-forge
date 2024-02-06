@@ -38,6 +38,7 @@ jobs:
           echo "matrix=$(cat /tmp/matrix)" >> $GITHUB_OUTPUT
 
   build:
+    if: ${{ needs.setup.outputs.matrix != '' }}
     environment: ${{ github.event_name == 'push' && 'main' || 'dev' }}
     needs:
       - setup
