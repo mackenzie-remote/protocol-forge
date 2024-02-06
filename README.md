@@ -65,7 +65,7 @@ time push the built image to our registry.
   requirements.
 
 > Items in the `MANIFEST` file are extracted from the container image and
-  pushed to our public S3 bucket. Items in the MANIFEST file follow the
+  added to the GitHub Release. Items in the MANIFEST file follow the
   in container PATH. The base name will be extracted.
 
 > Items in the `RUNNER` file (optional) are used to define the build runners
