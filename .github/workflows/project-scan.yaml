@@ -66,7 +66,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_GITHUB_TOKEN }}
           commit-message: 'chore(${{ matrix.name }}): Update to ${{ matrix.current_release }}'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -86,4 +86,4 @@ jobs:
         if: ${{ steps.cpr.outputs.pull-request-number }}
         run: gh pr merge --delete-branch --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
