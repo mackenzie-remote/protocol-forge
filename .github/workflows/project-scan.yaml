@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Check out git repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -50,7 +48,7 @@ jobs:
         id: create_pr
         run: |
           if git show-ref --quiet ${{ env.pr_branch_name }}; then
-            echo "Branch ${{ env.pr_branch_name }} exists, setting create_pr=false.."
+            echo "Branch ${{ env.pr_branch_name }} already exists, setting create_pr=false.."
             create_pr=false
           else
             echo "Branch ${{ env.pr_branch_name }} DOES NOT exist, setting create_pr=true.."
@@ -64,12 +62,10 @@ jobs:
       - name: Create Pull Request
         if: ${{ env.create_pr == 'true' }}
         id: cpr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PAT_GITHUB_TOKEN }}
-          commit-message: 'chore(${{ matrix.name }}): Update to ${{ matrix.current_release }}'
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit-message: 'chore(${{ matrix.name }}): Automated update to ${{ matrix.current_release }}'
           signoff: false
           branch: ${{ env.pr_branch_name }}
           delete-branch: true
